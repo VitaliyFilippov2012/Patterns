@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Memento;
+using OBSERVER;
 
 namespace OOP2019
 {
@@ -51,7 +52,28 @@ namespace OOP2019
 
         private void ObserverStart(object sender, RoutedEventArgs e)
         {
+            Stock stock = new Stock();
+            Bank bank = new Bank("ЮнитБанк", stock);
+            Broker broker = new Broker("Иван Иваныч", stock);
+            // имитация торгов
+            MessageBox.Show("Начинаем торги");
+            stock.Market();
+            foreach(string n in stock.Notifies)
+            {
+                MessageBox.Show(n);
+            }
+            // брокер прекращает наблюдать за торгам
+            MessageBox.Show("Брокер вышел из наблюдения");
 
+            broker.StopTrade();
+            // имитация торгов
+            MessageBox.Show("Начинаем торги");
+
+            stock.Market();
+            foreach (string n in stock.Notifies)
+            {
+                MessageBox.Show(n);
+            }
         }
     }
 }
