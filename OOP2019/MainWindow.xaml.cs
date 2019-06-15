@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Memento;
 
 namespace OOP2019
 {
@@ -23,6 +24,34 @@ namespace OOP2019
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MementoStart(object sender, RoutedEventArgs e)
+        {
+            Hero hero = new Hero();
+            MessageBox.Show(hero.Shoot()); // делаем выстрел, осталось 4 патронов
+            MessageBox.Show("Сохранились");
+            GameHistory game = new GameHistory();
+            game.History.Push(hero.SaveState()); // сохраняем игру
+            MessageBox.Show(hero.Shoot()); //делаем выстрел, осталось 3 патронов
+            MessageBox.Show("Возвращаемся к последнему сохранению");
+            MessageBox.Show(hero.RestoreState(game.History.Pop()));
+            MessageBox.Show(hero.Shoot()); //делаем выстрел, осталось 4 патронов
+        }
+
+        private void NullStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StrategyStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ObserverStart(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
