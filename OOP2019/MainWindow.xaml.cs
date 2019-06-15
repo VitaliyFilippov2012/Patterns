@@ -25,6 +25,8 @@ using Proxy;
 using Bridge;
 using Composite;
 using Facade;
+using Decorator;
+using Adapter;
 
 namespace OOP2019
 {
@@ -198,12 +200,37 @@ namespace OOP2019
 
         private void AdapterStart(object sender, RoutedEventArgs e)
         {
-
+            // путешественник
+            Driver driver = new Driver();
+            // машина
+            Auto auto = new Auto();
+            // отправляемся в путешествие
+            MessageBox.Show(driver.Travel(auto));
+            // встретились пески, надо использовать верблюда
+            Camel camel = new Camel();
+            // используем адаптер
+            ITransport camelTransport = new CamelToTransportAdapter(camel);
+            // продолжаем путь по пескам пустыни
+            MessageBox.Show(driver.Travel(camelTransport));
         }
 
         private void DecoratorStart(object sender, RoutedEventArgs e)
         {
+            Pizza pizza1 = new ItalianPizza();
+            pizza1 = new TomatoPizza(pizza1); // итальянская пицца с томатами
+            MessageBox.Show($"Название: {pizza1.Name}");
+            MessageBox.Show($"Цена: { pizza1.GetCost().ToString()}");
 
+            Pizza pizza2 = new ItalianPizza();
+            pizza2 = new CheesePizza(pizza2);// итальянская пиццы с сыром
+            MessageBox.Show($"Название: {pizza2.Name}");
+            MessageBox.Show($"Цена: {pizza2.GetCost().ToString()}" );
+
+            Pizza pizza3 = new BulgerianPizza();
+            pizza3 = new TomatoPizza(pizza3);
+            pizza3 = new CheesePizza(pizza3);// болгарская пиццы с томатами и сыром
+            MessageBox.Show($"Название: {pizza3.Name}");
+            MessageBox.Show($"Цена: {pizza3.GetCost().ToString()}");
         }
 
         private void CompositeStart(object sender, RoutedEventArgs e)
