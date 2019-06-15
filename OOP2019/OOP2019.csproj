@@ -64,6 +64,8 @@
     <Compile Include="Bridge.cs" />
     <Compile Include="ChainOfResponsibility.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Composite.cs" />
+    <Compile Include="Facade.cs" />
     <Compile Include="Iterator.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="Memento.cs" />

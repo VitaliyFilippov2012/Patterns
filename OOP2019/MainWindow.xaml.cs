@@ -23,6 +23,8 @@ using ChainOfResponsibility;
 using Command;
 using Proxy;
 using Bridge;
+using Composite;
+using Facade;
 
 namespace OOP2019
 {
@@ -185,13 +187,101 @@ namespace OOP2019
         private void BridgeStart(object sender, RoutedEventArgs e)
         {
             // создаем нового программиста, он работает с с++
-            Programmer freelancer = new FreelanceProgrammer(new CPPLanguage());
+            Bridge.Programmer freelancer = new FreelanceProgrammer(new CPPLanguage());
             MessageBox.Show(freelancer.DoWork());
             MessageBox.Show(freelancer.EarnMoney());
             // пришел новый заказ, но теперь нужен c#
             freelancer.Language = new CSharpLanguage();
             MessageBox.Show(freelancer.DoWork());
             MessageBox.Show(freelancer.EarnMoney());
+        }
+
+        private void AdapterStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DecoratorStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CompositeStart(object sender, RoutedEventArgs e)
+        {
+            Component fileSystem = new Directory("Файловая система");
+            // определяем новый диск
+            Component diskC = new Directory("Диск С");
+            // новые файлы
+            Component pngFile = new File("12345.png");
+            Component docxFile = new File("Document.docx");
+            // добавляем файлы на диск С
+            diskC.Add(pngFile);
+            diskC.Add(docxFile);
+            // добавляем диск С в файловую систему
+            fileSystem.Add(diskC);
+            // выводим все данные
+            MessageBox.Show(fileSystem.Print());
+
+            Console.WriteLine();
+            // удаляем с диска С файл
+            diskC.Remove(pngFile);
+            // создаем новую папку
+            Component docsFolder = new Directory("Мои Документы");
+            // добавляем в нее файлы
+            Component txtFile = new File("readme.txt");
+            Component csFile = new File("Program.cs");
+            docsFolder.Add(txtFile);
+            docsFolder.Add(csFile);
+            diskC.Add(docsFolder);
+
+            MessageBox.Show(fileSystem.Print());
+        }
+
+        private void FacadeStart(object sender, RoutedEventArgs e)
+        {
+            TextEditor textEditor = new TextEditor();
+            Compiller compiller = new Compiller();
+            CLR clr = new CLR();
+
+            VisualStudioFacade ide = new VisualStudioFacade(textEditor, compiller, clr);
+
+            Facade.Programmer programmer = new Facade.Programmer();
+            MessageBox.Show(programmer.CreateApplication(ide));
+        }
+
+        private void SingletonStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LazyStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BuilderStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PoolStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PrototypeStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AbstractFactoryStart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FactoryMethodStart(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
