@@ -16,6 +16,10 @@ using Memento;
 using OBSERVER;
 using Strategy;
 using NullObject;
+using Iterator;
+using Mediator;
+using Visitor;
+
 
 namespace OOP2019
 {
@@ -87,6 +91,54 @@ namespace OOP2019
             {
                 MessageBox.Show(n);
             }
+        }
+
+        private void IteratorStart(object sender, RoutedEventArgs e)
+        {
+            Library library = new Library();
+            Reader reader = new Reader();
+            reader.SeeBooks(library);
+            foreach(string n in reader.Books)
+            {
+                MessageBox.Show(n);
+            }
+        }
+
+        private void MediatorStart(object sender, RoutedEventArgs e)
+        {
+            ManagerMediator mediator = new ManagerMediator();
+            Colleague customer = new CustomerColleague(mediator);
+            Colleague programmer = new ProgrammerColleague(mediator);
+            Colleague tester = new TesterColleague(mediator);
+            mediator.Customer = customer;
+            mediator.Programmer = programmer;
+            mediator.Tester = tester;
+            MessageBox.Show(customer.Send("Есть заказ, надо сделать программу"));
+            MessageBox.Show(programmer.Send("Программа готова, надо протестировать"));
+            MessageBox.Show(tester.Send("Программа протестирована и готова к продаже"));
+        }
+
+        private void VisitorStart(object sender, RoutedEventArgs e)
+        {
+            var structure = new Cartoteka();
+            structure.Add(new Person { Name = "Иван Алексеев", Number = "82184931" });
+            structure.Add(new Company { Name = "Microsoft", RegNumber = "ewuir32141324", Number = "3424131445" });
+            structure.Accept(new HtmlVisitor());
+            MessageBox.Show("HTML");
+
+            foreach (string n in structure.Notify)
+            {
+                MessageBox.Show(n);
+            }
+            structure.Notify.Clear();
+            structure.Accept(new XmlVisitor());
+            MessageBox.Show("XMl");
+
+            foreach (string n in structure.Notify)
+            {
+                MessageBox.Show(n);
+            }
+            structure.Notify.Clear();
         }
     }
 }
