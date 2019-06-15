@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AbstractFactory.cs" />
     <Compile Include="Adapter.cs" />
     <Compile Include="Bridge.cs" />
     <Compile Include="ChainOfResponsibility.cs" />
@@ -68,12 +69,15 @@
     <Compile Include="Composite.cs" />
     <Compile Include="Decorator.cs" />
     <Compile Include="Facade.cs" />
+    <Compile Include="FactoryMethod.cs" />
     <Compile Include="Iterator.cs" />
+    <Compile Include="LazyInitialization.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="Memento.cs" />
     <Compile Include="Observer.cs" />
     <Compile Include="NullObject.cs" />
     <Compile Include="Proxy.cs" />
+    <Compile Include="Singleton.cs" />
     <Compile Include="SOLID.cs" />
     <Compile Include="Strategy.cs" />
     <Compile Include="Visitor.cs" />

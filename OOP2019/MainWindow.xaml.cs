@@ -27,6 +27,9 @@ using Composite;
 using Facade;
 using Decorator;
 using Adapter;
+using LazyInitialization;
+using AbstractFactory;
+using FactoryMethod;
 
 namespace OOP2019
 {
@@ -42,7 +45,7 @@ namespace OOP2019
 
         private void MementoStart(object sender, RoutedEventArgs e)
         {
-            Hero hero = new Hero();
+            Memento.Hero hero = new Memento.Hero();
             MessageBox.Show(hero.Shoot()); // делаем выстрел, осталось 4 патронов
             MessageBox.Show("Сохранились");
             GameHistory game = new GameHistory();
@@ -102,8 +105,8 @@ namespace OOP2019
 
         private void IteratorStart(object sender, RoutedEventArgs e)
         {
-            Library library = new Library();
-            Reader reader = new Reader();
+            Iterator.Library library = new Iterator.Library();
+            Iterator.Reader reader = new Iterator.Reader();
             reader.SeeBooks(library);
             foreach(string n in reader.Books)
             {
@@ -276,14 +279,12 @@ namespace OOP2019
             MessageBox.Show(programmer.CreateApplication(ide));
         }
 
-        private void SingletonStart(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void LazyStart(object sender, RoutedEventArgs e)
         {
-
+            LazyInitialization.Reader reader = new LazyInitialization.Reader();
+            MessageBox.Show(reader.ReadEbook());
+            MessageBox.Show(reader.ReadBook());
+            MessageBox.Show(reader.ReadBook());
         }
 
         private void BuilderStart(object sender, RoutedEventArgs e)
@@ -303,11 +304,23 @@ namespace OOP2019
 
         private void AbstractFactoryStart(object sender, RoutedEventArgs e)
         {
+            AbstractFactory.Hero elf = new AbstractFactory.Hero(new ElfFactory());
+            MessageBox.Show(elf.Hit());
+            MessageBox.Show(elf.Run());
 
+            AbstractFactory.Hero voin = new AbstractFactory.Hero(new VoinFactory());
+            MessageBox.Show(voin.Hit());
+            MessageBox.Show(voin.Run());
         }
 
         private void FactoryMethodStart(object sender, RoutedEventArgs e)
         {
+            Developer dev = new PanelDeveloper("ООО КирпичСтрой");
+            House house2 = dev.Create();
+            MessageBox.Show(dev.Name+" - "+house2.GetName());
+            dev = new WoodDeveloper("Частный застройщик");
+            House house = dev.Create();
+            MessageBox.Show(dev.Name + " - " + house.GetName());
 
         }
     }
