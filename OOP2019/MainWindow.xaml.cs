@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Memento;
 using OBSERVER;
 using Strategy;
+using NullObject;
 
 namespace OOP2019
 {
@@ -43,6 +44,11 @@ namespace OOP2019
 
         private void NullStart(object sender, RoutedEventArgs e)
         {
+            TextConverter textConverter = new UpperCaseTextConverter();
+            MessageBox.Show(textConverter.Convert("Hello World"));
+            MessageBox.Show("Объект - заглушка");
+            textConverter = new NullTextConverter();//Вместо null (объект -заглушка)
+            MessageBox.Show(textConverter.Convert("Hello World"));
 
         }
 
