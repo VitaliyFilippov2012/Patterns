@@ -64,6 +64,7 @@
     <Compile Include="Memento.cs" />
     <Compile Include="Observer.cs" />
     <Compile Include="SOLID.cs" />
+    <Compile Include="Strategy.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

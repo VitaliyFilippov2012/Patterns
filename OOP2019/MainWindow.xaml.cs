@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Memento;
 using OBSERVER;
+using Strategy;
 
 namespace OOP2019
 {
@@ -47,7 +48,13 @@ namespace OOP2019
 
         private void StrategyStart(object sender, RoutedEventArgs e)
         {
+            Car auto = new Car(4, "Volvo", new PetrolMove());
+            MessageBox.Show("Едем на дачу");
+            MessageBox.Show(auto.Move());
+            MessageBox.Show("Топливо закончилось, переходим на электричество");
 
+            auto.Movable = new ElectricMove();
+            MessageBox.Show(auto.Move());
         }
 
         private void ObserverStart(object sender, RoutedEventArgs e)
