@@ -61,11 +61,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bridge.cs" />
+    <Compile Include="ChainOfResponsibility.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="Iterator.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="Memento.cs" />
     <Compile Include="Observer.cs" />
     <Compile Include="NullObject.cs" />
+    <Compile Include="Proxy.cs" />
     <Compile Include="SOLID.cs" />
     <Compile Include="Strategy.cs" />
     <Compile Include="Visitor.cs" />

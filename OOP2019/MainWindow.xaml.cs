@@ -19,7 +19,10 @@ using NullObject;
 using Iterator;
 using Mediator;
 using Visitor;
-
+using ChainOfResponsibility;
+using Command;
+using Proxy;
+using Bridge;
 
 namespace OOP2019
 {
@@ -139,6 +142,56 @@ namespace OOP2019
                 MessageBox.Show(n);
             }
             structure.Notify.Clear();
+        }
+
+        private void ChainStart(object sender, RoutedEventArgs e)
+        {
+            Handler h1 = new ConcreteHandler1();
+            Handler h2 = new ConcreteHandler2();
+            h1.Successor = h2;
+            MessageBox.Show(h1.HandleRequest(2,""));
+        }
+
+        private void CommandStart(object sender, RoutedEventArgs e)
+        {
+            Pult pult = new Pult();
+            TV tv = new TV();
+            pult.SetCommand(new TVOnCommand(tv));
+            MessageBox.Show(pult.PressButton());
+            MessageBox.Show(pult.PressUndo());
+            
+        }
+
+        private void ProxyStart(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                IBook book = new BookStoreProxy();
+                // читаем первую страницу
+                Proxy.Page page1 = book.GetPage(2);
+                MessageBox.Show(page1.Text);
+                // читаем вторую страницу
+                Proxy.Page page2 = book.GetPage(6);
+                MessageBox.Show(page2.Text);
+                // возвращаемся на первую страницу    
+                page1 = book.GetPage(16);
+                MessageBox.Show(page1.Text);
+
+            }
+
+            catch { }
+        }
+
+        private void BridgeStart(object sender, RoutedEventArgs e)
+        {
+            // создаем нового программиста, он работает с с++
+            Programmer freelancer = new FreelanceProgrammer(new CPPLanguage());
+            MessageBox.Show(freelancer.DoWork());
+            MessageBox.Show(freelancer.EarnMoney());
+            // пришел новый заказ, но теперь нужен c#
+            freelancer.Language = new CSharpLanguage();
+            MessageBox.Show(freelancer.DoWork());
+            MessageBox.Show(freelancer.EarnMoney());
         }
     }
 }
