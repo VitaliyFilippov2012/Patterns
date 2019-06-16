@@ -64,6 +64,7 @@
     <Compile Include="AbstractFactory.cs" />
     <Compile Include="Adapter.cs" />
     <Compile Include="Bridge.cs" />
+    <Compile Include="Builder.cs" />
     <Compile Include="ChainOfResponsibility.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Composite.cs" />
@@ -74,8 +75,10 @@
     <Compile Include="LazyInitialization.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="Memento.cs" />
+    <Compile Include="ObjectPool.cs" />
     <Compile Include="Observer.cs" />
     <Compile Include="NullObject.cs" />
+    <Compile Include="Prototype.cs" />
     <Compile Include="Proxy.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="SOLID.cs" />

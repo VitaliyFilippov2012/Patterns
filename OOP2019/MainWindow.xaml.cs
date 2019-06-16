@@ -30,6 +30,10 @@ using Adapter;
 using LazyInitialization;
 using AbstractFactory;
 using FactoryMethod;
+using ObjectPool;
+using Prototype;
+using Builder;
+
 
 namespace OOP2019
 {
@@ -289,16 +293,62 @@ namespace OOP2019
 
         private void BuilderStart(object sender, RoutedEventArgs e)
         {
-
+            // содаем объект пекаря
+            Baker baker = new Baker();
+            // создаем билдер для ржаного хлеба
+            BreadBuilder builder = new RyeBreadBuilder();
+            // выпекаем
+            Bread ryeBread = baker.Bake(builder);
+            MessageBox.Show(ryeBread.ToString());
+            // оздаем билдер для пшеничного хлеба
+            builder = new WheatBreadBuilder();
+            Bread wheatBread = baker.Bake(builder);
+            MessageBox.Show(wheatBread.ToString());
         }
 
         private void PoolStart(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Initialize pool");
+            var pool = new ConnectionPool(minSize: 2, maxSize: 5);
+            MessageBox.Show("Get connection #1 (fast)");
+            var c1 = pool.GetConnection();
+            MessageBox.Show("Get connection #2 (fast)");
+            var c2 = pool.GetConnection();
+            MessageBox.Show("Get connection #3 (slow)");
+            var c3 = pool.GetConnection();
+            MessageBox.Show("Get connection #4 (slow)");
+            var c4 = pool.GetConnection();
+            MessageBox.Show("Release connection #3");
+            pool.ReleaseConnection(c3);
+            MessageBox.Show("Release connection #2");
+            pool.ReleaseConnection(c2);
+            MessageBox.Show("Get connection #5 (c2)");
+            var c5 = pool.GetConnection();
+            MessageBox.Show(ReferenceEquals(c2, c5).ToString()); // True;
+            pool.GetConnection();
+            foreach(string n in Connection.History)
+            {
+                MessageBox.Show(n);
+            }
         }
 
         private void PrototypeStart(object sender, RoutedEventArgs e)
         {
+            IFigure figure = new Prototype.Rectangle(30, 40);
+            IFigure clonedFigure = figure.Clone();
+            MessageBox.Show(figure.GetInfo());
+            MessageBox.Show(clonedFigure.GetInfo());
+
+            figure = new Circle(30);
+            clonedFigure = figure.Clone();
+            MessageBox.Show(figure.GetInfo());
+            MessageBox.Show(clonedFigure.GetInfo());
+
+            figure = new Circle(15);
+            MessageBox.Show(figure.GetInfo());
+            Circle deepClonedFigure = figure.DeepCopy() as Circle;
+            MessageBox.Show(deepClonedFigure.GetInfo());
+
 
         }
 
